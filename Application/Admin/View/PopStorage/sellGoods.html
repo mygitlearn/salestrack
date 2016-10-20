@@ -1,0 +1,79 @@
+<extend name="Public/base" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+</block>
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>销售管理</h2>
+    </div>
+    <div>
+        <div class="tab-wrap">
+            <ul class="tab-nav nav">
+                <li><a  class="current" href="#" style="border-color:#34b4e0 #e0e0e0 #f6f6f6">数据采集</a></li>
+                <li><a href="__URL__/advantagelist">广告展示</a></li>
+            </ul>
+            </div>
+        <div style="float: left">
+            <form action="__URL__/submitsellgoods" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <div class="form-item">
+                    <label class="item-label">数据获取<span class="check-tips"></span></label>
+                    <div class="controls">
+                        <textarea name="information" id="information" cols="54" rows="10" placeholder="盛放所扫描的二维码"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal" >提 交</button>
+                    <button class="btn btn-return " onclick="javascript:history.back(-1);return false;" id="nosubmit" style="margin-left: 120px;">取 消</button>
+                </div>
+          </form>
+        </div>
+         <!-- 广告视频播放位置！-->
+        <div style="float: right">
+            <div class="form_item">
+                <iframe src ="__URL__/videolist" frameborder="0" width="680px" height="400px">
+                    <p>你的浏览器不支持iframe标签.</p>
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+</block>
+
+<block name="script">
+    <script src="__JS__/jqueryfileuploadmaster/js/vendor/jquery.ui.widget.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.fileupload.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript">
+        /*当点击上传是*/
+        $(function() {
+            $("#uploadefile").fileupload({
+            }).bind('fileuploadprogress', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $("#progress").css('width',progress + '%');
+                $("#progress").html(progress + '%');
+            }).bind('fileuploaddone', function (e, data) {
+                $("#upload").css({display:"none"});
+                $("#cancle").css({display:""});
+            });
+        });
+
+        /*当点击取消重新刷屏*/
+        $("#cancle").click(function(){
+            document.location.reload();
+        });
+
+        /*导航高亮*/
+        $(function() {
+            $('.side-sub-menu:eq(1)').find('li:eq(0)').addClass('current');
+        });
+
+        /*标题导航高亮*/
+        /*$(function() {
+            $('.main-nav').find('li:eq(4)').css('backgroundColor', '#7963df');
+        });*/
+    </script>
+
+</block>

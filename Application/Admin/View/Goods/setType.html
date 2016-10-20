@@ -1,0 +1,42 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>修改商品种类</h2>
+    </div>
+    <form action="{:U('Goods/do_setType')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">商品名称<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="goodsname" name="goodsname" value="{$type.goodsname}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">规格<span class="check-tips">（例如：400粒/袋）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="norms" name="norms" value="{$type.norms}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">价格<span class="check-tips">（例如：40元/袋）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="price" name="price" value="{$type.price}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">种类<span class="check-tips">（例如：玉米）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="verify" name="verify" value="{$type.verify}">
+            </div>
+        </div>
+        <input type="hidden" id="typeid" name="id" value="{$type.id}" />
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="{:U('Goods/goodsType')}">返 回</a>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+
+</block>

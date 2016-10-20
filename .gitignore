@@ -1,0 +1,8 @@
+Application/Runtime/*
+.idea/
+*.log
+Public/Logs/
+Application/Common/Conf/config.php
+Uploads/Doc/*
+Uploads/Picture/*
+Uploads/Video/*

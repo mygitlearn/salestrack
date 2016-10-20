@@ -1,0 +1,73 @@
+<extend name="Public/base" />
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+	<link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+</block>
+<block name="body">
+		<div class="main-title">
+		<h2>退货管理</h2>
+	</div>
+
+	<form action="__URL__/returngood" method="post" enctype="multipart/form-data">
+		<div class="form-item">
+			<input type="file" class="btn"  name="filename" multiple>
+		</div>
+
+		<div class="form-item" style="margin-top: 6px">
+			<label class="item-label">数据获取<span class="check-tips"></span></label>
+			<div class="controls">
+				<textarea name="datecode" id="information" cols="54" rows="6" placeholder="盛放所扫描的二维码"></textarea>
+			</div>
+		</div>
+
+		<div class="form-item" style="margin-top: 6px">
+			<label class="item-label">退货到<span class="check-tips">（向上一级代理商退货）</span></label>
+			<select name="fatherid">
+				<volist name="list" id="vo">
+					<option value="{$vo.id}">{$vo.realname}</option>
+				</volist>
+			</select>
+		</div>
+
+		<div class="form-item" style="margin-top: 6px">
+			<label class="item-label">退货原因<span class="check-tips">（退货原因不能为空）</span></label>
+			<div class="controls">
+				<textarea name="reason" id="reason" cols="54" rows="6" placeholder="请输入退货原因"></textarea>
+			</div>
+		</div>
+		<div class="form-item"  style="margin-top: 6px">
+			<button class="btn" id="submit" type="submit" target-form="form-horizontal" style="font-weight: bold;
+    padding: 10px 50px;">提 交</button>
+			<button class="btn btn-return" id="nosubmit" onclick="javascript:history.back(-1);return false;" style="margin-left: 120px">取 消</button>
+		</div>
+	</form>
+</block>
+
+<block name="script">
+	<script src="__JS__/jqueryfileuploadmaster/js/vendor/jquery.ui.widget.js"></script>
+	<script src="__JS__/jqueryfileuploadmaster/js/jquery.fileupload.js"></script>
+	<script src="__JS__/jqueryfileuploadmaster/js/jquery.iframe-transport.js"></script>
+   <script type="text/javascript">
+	/*当点击上传是*/
+	$(function() {
+		$("#uploadefile").fileupload({
+		}).bind('fileuploadprogress', function (e, data) {
+			var progress = parseInt(data.loaded / data.total * 100, 10);
+			$("#progress").css('width',progress + '%');
+			$("#progress").html(progress + '%');
+		}).bind('fileuploaddone', function (e, data) {
+			$("#upload").css({display:"none"});
+			$("#cancle").css({display:""});
+		});
+	});
+	/*当点击取消重新刷屏*/
+	$("#cancle").click(function(){
+		document.location.reload();
+	});
+
+	/*标题导航高亮*/
+	/*$(function() {
+		$('.main-nav').find('li:eq(7)').css('backgroundColor', '#7963df');
+	  });*/
+</script>
+</block>

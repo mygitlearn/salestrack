@@ -1,0 +1,19 @@
+.lastbottonset{
+    margin-top: 50px;
+
+}
+
+.setcolor{
+    background-color: #7963df;
+}
+.bouttenset{
+    border-color: transparent;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 50px;
+}
+input{
+    vertical-align:middle; margin:0; padding:0
+}
+.txt{ height:22px; border:1px solid #cdcdcd; width:180px;}
+.file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }

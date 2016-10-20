@@ -1,0 +1,67 @@
+<extend name="Public/base" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/pushstorage/index.css">
+</block>
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>入库管理</h2>
+    </div>
+        <form action="__URL__/submitpush" method="post" enctype="multipart/form-data">
+            <div class="form_item">
+                <input type="file"  class="btn" id="uploadefile" name="filename">
+            </div>
+            <div class="form_item" style="margin-top: 26px">
+                <label>商品种类:</label>
+                <select name="goodid">
+                    <volist name="list" id="vo">
+                        <option value="{$vo.id}">{$vo.goodsname}</option>
+                    </volist>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <div class="lastbottonset" style="margin-top: 36px">
+                    <button class="btn"  type="submit"  target-form="form-horizontal">确 定</button>
+                    <button class="btn" onclick="javascript:history.back(-1);return false;" style="margin-left: 60px">返 回</button>
+                </div>
+            </div>
+        </form>
+<input type="hidden" id="url" url="__URL__/submitpush">
+
+</block>
+
+<block name="script">
+    <script src="__JS__/jqueryfileuploadmaster/js/vendor/jquery.ui.widget.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.fileupload.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript">
+
+        /*当点击上传是*/
+        /*$(function() {
+            $("#uploadefile").fileupload({
+                url:$("#url").attr('url'),
+                sequentialUploads: true
+            }).bind('fileuploadprogress', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $("#progress").css('width',progress + '%');
+                $("#progress").html(progress + '%');
+            }).bind('fileuploaddone', function (e, data) {
+                $("#upload").css({display:"none"});
+                $("#cancle").css({display:""});
+            });
+        });*/
+        /*当点击取消重新刷屏*/
+        $("#cancle").click(function(){
+            document.location.reload();
+        });
+
+        /*导航高亮*/
+       /* $(function() {
+            $('.main-nav').find('li:eq(3)').css('backgroundColor', '#7963df');
+        });*/
+    </script>
+
+</block>

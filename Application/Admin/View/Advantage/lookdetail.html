@@ -1,0 +1,66 @@
+
+<extend name="Public/base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__CSS__/advantage/index.css" />
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/advantage/lookdetail.css">
+</block>
+<block name="body">
+    <div class="main-title">
+        <h2>查看广告</h2>
+    </div>
+
+    <div class="form-item">
+        <if condition="$data.type eq 1">
+            <img src="{$data.url}" align="center">
+            <else /><div  class="video-player"  align="center">
+            <video  controls="controls" loop="loop" autoplay="autoplay"  id="video">
+                <source src="{$dtat.url}" type="video/mpeg" />
+                <source src="{$dtat.url}" type="video/avi" />
+                <source src="{$dtat.url}" type="video/rmvb" />
+                <source src="{$dtat.url}" type="video/rm" />
+                <source src="{$dtat.url}" type="video/wmv" />
+                <source src="{$dtat.url}" type="video/ogg" />
+                <source src="{$data.url}" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        </if>
+
+    </div>
+        <div class="form-item" style="margin-top: 10px">
+           <!--上一篇题目-->
+            <span>
+               上一篇<a href="__URL__/lookdetail/id/{$arr.last_id}">{$arr.last_title}</a>
+            </span>
+            <!--下一篇题目-->
+            <span class="aftertitle">
+                下一篇<a href="__URL__/lookdetail/id/{$arr.after_id}">{$arr.after_title}</a>
+            </span>
+            <!--返回-->
+            <!--<button class="btn btn-return"  onclick="javascript:history.back(-1);return false;">-->
+                <a class="btn btn-return" href="__URL__/index">返 回</a>
+            <!--</button>-->
+        </div>
+</block>
+<!-- 在这里面写js-->
+<block name="script">
+
+    <script type="text/javascript">
+        /*导航高亮*/
+        $(function() {
+            $('.side-sub-menu:eq(0)').find('li:eq(0)').addClass('current');
+        });
+
+        /*标题导航高亮*/
+        /*$(function() {
+            $('.main-nav').find('li:eq(0)').css('backgroundColor', '#7963df');
+        });*/
+    </script>
+
+
+
+
+</block>

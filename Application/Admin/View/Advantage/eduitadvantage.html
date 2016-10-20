@@ -1,0 +1,90 @@
+
+<extend name="Public/base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__CSS__/advantage/index.css" />
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+</block>
+<block name="body">
+    <div class="main-title">
+        <h2>编辑广告</h2>
+    </div>
+
+    <form action="__URL__/submiteduit" method="post" class="form-horizontal" enctype="multipart/form-data">
+        <div class="controls">
+            <input type="hidden" class="text input-large" name="id" value="{$data.id}">
+        </div>
+        <div class="form-item">
+            <label class="item-label">标题<span class="check-tips">（文件的标题不能为空）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="{$data.title}">
+            </div>
+
+        </div>
+
+        <div class="form-item">
+            <label class="item-label">类型<span class="check-tips">（文件的类型不能修改）</span></label>
+            <div class="controls">
+                <if condition="$data.type eq  1 ">
+                    <div class="controls">
+                        <input type="text" class="text input-large" value="图片" readonly="readonly">
+                    </div>
+                    <else />
+                    <div class="controls">
+                        <input type="text" class="text input-large" value="视频" readonly="readonly">
+                    </div>
+                </if>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">描述<span class="check-tips"></span></label>
+            <div class="controls">
+                <textarea name="information" cols="54" rows="5">{$data.info}</textarea>
+            </div>
+        </div>
+        <div class="progress progress-striped active" role="progressbar" aria-valuemin="10" aria-valuemax="100" aria-valuenow="0"><div id="weixin_progress" class="progress-bar progress-bar-success" style="width:0%;">
+        </div>
+        </div>
+        <div class="form-item">
+            <if condition="$data.type eq 1">
+                <img src="{$data.url}" align="center">
+                <else /><div  class="video-player">
+                <video  controls="controls" loop="loop" id="video">
+                    <source src="{$dtat.url}" type="video/mpeg" />
+                    <source src="{$dtat.url}" type="video/avi" />
+                    <source src="{$dtat.url}" type="video/rmvb" />
+                    <source src="{$dtat.url}" type="video/rm" />
+                    <source src="{$dtat.url}" type="video/wmv" />
+                    <source src="{$dtat.url}" type="video/ogg" />
+                    <source src="{$data.url}" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            </if>
+        </div>
+        <div class="form-item" style="margin-top: 10px">
+            <button  id="submit"  class="btn btn-return" type="submit" target-form="form-horizontal">提 交</button>
+            <button class="btn btn-return"   onclick="javascript:history.back(-1);return false;">返回</button>
+        </div>
+    </form>
+</block>
+<!-- 在这里面写js-->
+<block name="script">
+
+    <script type="text/javascript">
+
+        /*导航高亮*/
+        $(function() {
+            $('.side-sub-menu:eq(0)').find('li:eq(0)').addClass('current');
+        });
+        /*标题导航高亮*/
+        /*$(function() {
+            $('.main-nav').find('li:eq(0)').css('backgroundColor', '#7963df');
+        });*/
+    </script>
+
+
+
+
+</block>

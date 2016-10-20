@@ -1,0 +1,58 @@
+<extend name="Public/base" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__JS__/picture/css/stylesset.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/popstorage/index.css">
+</block>
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>销售管理</h2>
+    </div>
+
+    <div>
+        <div class="tab-wrap">
+            <ul class="tab-nav nav">
+                <li><a   href="__URL__/sellGoods" >数据采集</a></li>
+                <li><a   href="#" style="border-color:#34b4e0 #e0e0e0 #f6f6f6">广告展示</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="form_item">
+        <div id="slider" >
+            <ul id="sliderContent">
+                <foreach name="list" item="vo">
+                    <li class="sliderImage">
+                        <img src="{$vo.url}" width="1100" height="600" alt="{$vo.title}">
+                        <span class="bottom">{$vo.info}</span>
+                    </li>
+                </foreach>
+                <div class="clear sliderImage"></div>
+            </ul>
+        </div>
+    </div>
+
+</block>
+
+<block name="script">
+
+    <script type="text/javascript" src="__JS__/picture/js/s3Slider.js"></script>
+    <script type="text/javascript">
+      /*设置循环播放图片的间隔时间*/
+
+      $(document).ready(function(){
+          $('#slider').s3Slider({
+              timeOut:5000
+          });
+      });
+
+        /*左导航高亮*/
+        $(function() {
+            $('.side-sub-menu:eq(1)').find('li:eq(0)').addClass('current');
+        });
+      /*标题导航高亮*/
+      /*$(function() {
+          $('.main-nav').find('li:eq(4)').css('backgroundColor', '#7963df');
+      });*/
+    </script>
+
+</block>

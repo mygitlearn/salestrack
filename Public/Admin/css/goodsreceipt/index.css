@@ -1,0 +1,23 @@
+.fontset{
+    font-family: 'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;
+    font-size: 25px;
+}
+.goods-table{
+	width: 90%;
+	cursor: default;
+	float: left;
+	background-color: rgb(245,245,247);
+}
+.but{
+	width: 60px;
+	cursor: pointer;
+	color: black;
+	/*background-color: #E0FFFF;*/
+}
+.p{
+	display: none;
+}
+.look{
+	width: 31%;
+	float: left;
+}

@@ -1,0 +1,94 @@
+
+<extend name="Public/base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__CSS__/advantage/index.css" />
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+    <link href="__JS__/Uploadify/example/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="__JS__/Uploadify/example/css/uploadify.css" rel="stylesheet" type="text/css" />
+</block>
+<block name="body">
+    <div class="main-title">
+        <h2>添加广告</h2>
+    </div>
+      <form action="__URL__/submitupload" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <div class="form-item">
+                <label class="item-label">标题<span class="check-tips">（广告标题不能设置为空）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="title" value="" placeholder="请给上传的广告添加标题">
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="controls">
+                    <label class="item-label">类型<span class="check-tips"></span></label>
+                    <select  name="type">
+                        <option value="0">视频</option>
+                        <option value="1">图片</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">描述<span class="check-tips">（上传文件的详细描述不能为空）</span></label>
+                <div class="controls">
+                    <textarea name="information" cols="69" rows="6" placeholder="上传文件的简要描述"></textarea>
+                </div>
+            </div>
+
+          <!--对上传按钮进行设置-->
+            <div class="form-item">
+                <label class="item-label">上传文件<span class="check-tips">（上传的文件不能为空！）</span></label>
+                <div class="thumbnail col-sm-6" style="margin-top:6px">
+                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="10" aria-valuemax="100" aria-valuenow="0">
+                        <div id="progress" class="progress-bar progress-bar-success" style="width:0%;"></div>
+                    </div>
+                    <div class="caption">
+                        <span id="upload" class="btn btn-primary fileinput-button">
+                        <span>上 传</span>
+                        <input type="file" id="uploadefile" name="filename" multiple>
+                        </span>
+                        <a id="cancle"  class="btn btn-warning" role="button"  style="display:none">取 消</a>
+                    </div>
+                </div>
+            </div>
+
+          <div class="form-item" style="margin-top: 20px">
+                <button  id="submit"  class="btn submit-btn ajax-post" type="submit" target-form="form-horizontal">提 交</button>
+                <button class="btn btn-return" style="margin-left: 80px;"  onclick="javascript:history.back(-1);return false;" >返 回</button>
+          </div>
+        </form>
+</block>
+<!-- 在这里面写js-->
+<block name="script">
+    <script src="__JS__/jqueryfileuploadmaster/js/vendor/jquery.ui.widget.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.fileupload.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript">
+       /*当点击上传是*/
+        $(function() {
+            $("#uploadefile").fileupload({
+            }).bind('fileuploadprogress', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $("#progress").css('width',progress + '%');
+                $("#progress").html(progress + '%');
+            }).bind('fileuploaddone', function (e, data) {
+                $("#upload").css({display:"none"});
+                $("#cancle").css({display:""});
+            });
+        });
+       /*当点击取消重新刷屏*/
+       $("#cancle").click(function(){
+               document.location.reload();
+       });
+        /*导航高亮*/
+        $(function() {
+            $('.side-sub-menu:eq(0)').find('li:eq(0)').addClass('current');
+        });
+
+       /*标题导航高亮*/
+      /* $(function() {
+           $('.main-nav').find('li:eq(0)').css('backgroundColor', '#7963df');
+       });*/
+    </script>
+
+</block>

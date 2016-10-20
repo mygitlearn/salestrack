@@ -1,0 +1,82 @@
+<extend name="Public/base" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/popstorage/index.css">
+</block>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>发货管理</h2>
+    </div>
+   <div>
+       <form action="__URL__/submitposstroge" method="post" enctype="multipart/form-data">
+
+           <div class="form_item">
+               <input type="file"  name="filename" class="btn" multiple>
+           </div>
+
+           <div class="form-item">
+               <label class="item-label">数据获取<span class="check-tips"></span></label>
+               <div class="controls">
+                   <textarea name="information" id="information" cols="54" rows="10" placeholder="盛放所扫描的二维码"></textarea>
+               </div>
+           </div>
+
+           <div class="form_item" style="margin-top: 10px">
+               <label class="item-label">发送到:</label>
+               <select name="userid">
+                   <volist name="list" id="vo">
+                       <option value="{$vo.id}">{$vo.realname}</option>
+                   </volist>
+               </select>
+           </div>
+           <div class="form-item">
+               <div style="margin-top: 20px;">
+               <button class="btn" id="submit" type="submit" style="font-weight: bold;
+padding: 10px 50px;">确 定</button>
+               <a class="btn" href="__URL__/index" style="margin-left: 85px;font-weight: bold;
+padding: 10px 50px;">取 消</a>
+               </div>
+           </div>
+       </form>
+   </div>
+    <div class="page">
+        {$page}
+    </div>
+</block>
+
+<block name="script">
+    <script src="__JS__/jqueryfileuploadmaster/js/vendor/jquery.ui.widget.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.fileupload.js"></script>
+    <script src="__JS__/jqueryfileuploadmaster/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript">
+       /* *//*当点击上传是*//*
+        $(function() {
+            $("#uploadefile").fileupload({
+            }).bind('fileuploadprogress', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $("#progress").css('width',progress + '%');
+                $("#progress").html(progress + '%');
+            }).bind('fileuploaddone', function (e, data) {
+                $("#upload").css({display:"none"});
+                $("#cancle").css({display:""});
+            });
+        });*/
+        /*当点击取消重新刷屏*/
+//        $("#cancle").click(function(){
+//            document.location.reload();
+//        });
+        /*导航高亮*/
+        $(function() {
+            $('.side-sub-menu:eq(0)').find('li:eq(0)').addClass('current');
+        });
+
+        /*$(function() {
+            $('.main-nav').find('li:eq(4)').css('backgroundColor', '#7963df');
+        });*/
+    </script>
+
+</block>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>销售跟踪管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <!--<link rel="stylesheet" type="text/css" href="__STATIC__/bootstrap/css/bootstrap.css" media="all">-->
+    <!--<link rel="stylesheet" type="text/css" href="__STATIC__/bootstrap/css/bootstrap-responsive.css">-->
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload.css">
+    <link rel="stylesheet" type="text/css" href="__JS__/jqueryfileuploadmaster/css/jquery.fileupload-ui.css">
+    <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="__JS__/jqueryfileuploadmaster/js/vendor/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="__JS__/jqueryfileuploadmaster/js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="__JS__/jqueryfileuploadmaster/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="__STATIC__/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index/index.css">
+    <script type="text/javascript" >
+        /*当点击上传是*/
+        $(function() {
+            $("#uploadefile").fileupload({
+            }).bind('fileuploadprogress', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $("#progress .bar").css('width',progress + '%');
+                $("#progress .bar").html(progress + '%');
+            }).bind('fileuploaddone', function (e, data) {
+                $("#upload").css({display:"none"});
+                $("#cancle").css({display:""});
+            });
+        });
+
+        function get_time()
+        {
+            var date=new Date();
+            var year="",month="",day="",week="",hour="",minute="",second="";
+            year=date.getFullYear();
+            month=add_zero(date.getMonth()+1);
+            day=add_zero(date.getDate());
+            week=date.getDay();
+            switch (date.getDay()) {
+                case 0:val="周日";break
+                case 1:val="周一";break
+                case 2:val="周二";break
+                case 3:val="周三";break
+                case 4:val="周四";break
+                case 5:val="周五";break
+                case 6:val="周六";break
+            }
+            hour=add_zero(date.getHours());
+            minute=add_zero(date.getMinutes());
+            second=add_zero(date.getSeconds());
+            document.getElementById("timetable").innerHTML=" "+year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second+" "+val;
+        }
+
+        function add_zero(temp)
+        {
+            if(temp<10) return "0"+temp;
+            else return temp;
+        }
+        setInterval("get_time()",1000);
+    </script>
+    <!--<![endif]-->
+</head>
+<body style="background-image: url(__IMG__/bag.jpg)">
+<div style="margin-bottom: 10px;margin-left: 20px;font-size: 16px;margin-top: 5px">
+    <span style="font-size: 20px;color:#006ECC;margin-right: 15px ">欢迎使用销售跟踪平台</span> 现在是：<span id="timetable"></span>
+</div>
+
+<div id="menu">
+    <ul>
+        <li><a href="__URL__/index" >单个售出</a></li>
+        <li><a href="#" style="color: #ffffff" >批量发货</a></li>
+    </ul>
+</div>
+<div class="formset">
+         <form action="__URL__/submitbulkshipment" method="post" enctype="multipart/form-data">
+
+             <div class="form-item" style="margin-top: 15px">
+                 <input type="file"  class="btn" name="filename" style="background-color: #E7E38A;margin-left: 67px" multiple>
+             </div>
+
+             <div style="margin-left: 80px">
+                 <span><p>（上传文件跟数据采集只需选择一个即可）</p></span>
+                 <div style="width: 300px">
+                     <textarea name="datecode" id="information" cols="54" rows="10" placeholder="采集所扫描的二维码数据"></textarea>
+                 </div>
+             </div>
+
+             <div  style="margin-top: 10px;">
+                 <span style="margin-left: 80px">发送到:</span>
+                 <select name="userid">
+                     <volist name="list" id="vo" >
+                         <option value="{$vo.id}" style="width: 380px;height: 25px">{$vo.realname}</option>
+                     </volist>
+                 </select>
+             </div>
+             <div>
+                 <div style="margin-top: 20px;">
+                     <button class="btna" id="submit" type="submit" target-form="form-horizontal" style="margin-left: 100px">提 交</button>
+                     <a class="btna" href="__URL__/index" style="margin-left: 55px">返 回</a>
+                 </div>
+             </div>
+        </form>
+     </div>
+<input type="hidden" url="__URL__/index" id="hide">
+<div style="margin-top: 50px" id="footer">
+    <div align="center">CopyRight © 三月软件工作室  豫ICP备14025783号</div>
+</div>
+</body>
+</html>

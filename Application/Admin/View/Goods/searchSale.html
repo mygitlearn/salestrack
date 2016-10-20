@@ -1,0 +1,152 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>销售列表</h2>
+    </div>
+    <div class="cf">
+        <form action="{:U('Goods/searchSale')}" method="GET" class="form-horizontal">
+            <span>
+                <input style="width:170px;border:1px solid #EEEEEE;height:27px;" type="text"
+                       placeholder="&nbsp;开始时间" class="Wdate" name="start_time"
+                       onclick="WdatePicker({maxDate:'#F{$dp.$D(\\'end\\')}'})" id="start"/>
+            </span>
+            <span  style="margin-top:4px;background-color:#F6F6F6;border:0px solid;">
+                --
+            </span>
+            <span style="margin-right:45px;">
+                  <input style="border:1px solid #EEEEEE;width:170px;height:27px;" type="text"
+                         placeholder="&nbsp;结束时间" class="Wdate" name="end_time"
+                         onclick="WdatePicker({minDate:'#F{$dp.$D(\\'start\\')}',maxDate:'2050-10-01'})" id="end"/>
+            </span>
+
+            <span>
+                <select name="type">
+                    <option value="0">所有商品类别</option>
+                    <volist name="typelist" id="type">
+                        <option value="{$type.id}">{$type.verify}({$type.goodsname})</option>
+                    </volist>
+                </select>
+            </span>
+
+            <span>
+                <input class="btn" style="margin-left: 20px" id="search" type="submit" target-form="form-horizontal" value="搜索">
+            </span>
+        </form>
+    </div>
+    <div class="cf">
+        <br/>
+    </div>
+    <div class="cf">
+        <a class="btn" href="{:U('export')}" id="dao" >导出报表</a>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+        <table class="">
+            <thead>
+            <tr>
+                <th class="">编号</th>
+                <th class="">发货时间</th>
+                <th class="">客户</th>
+                <th class="">电话</th>
+                <th class="">地址</th>
+                <th class="">名称</th>
+                <th class="">规格</th>
+                <th class="">单价</th>
+                <th class="">品种</th>
+                <th class="">数量(袋)</th>
+                <th class="">发货商</th>
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="_list">
+                <volist name="_list" id="vo">
+                    <tr>
+                        <td>{$vo.NO}</td>
+                        <td>{$vo.time}</td>
+                        <td>{$vo.receiver}</td>
+                        <td>{$vo.tel}</td>
+                        <td>{$vo.address}</td>
+                        <td>{$vo.goodsname}</td>
+                        <td>{$vo.norms}</td>
+                        <td>{$vo.price}</td>
+                        <td>{$vo.verify}</td>
+                        <td>{$vo.salecount}</td>
+                        <td>{$vo.shipper}</td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+            </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+    <script type="text/javascript">
+        //上传图片
+        /* 初始化上传插件 */
+        $("#upload_picture").uploadify({
+            "height"          : 30,
+            "swf"             : "__STATIC__/uploadify/uploadify.swf",
+            "fileObjName"     : "download",
+            "buttonText"      : "上传查询文件",
+            "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+            "width"           : 120,
+            'removeTimeout'	  : 1,
+            'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+            "onUploadSuccess" : uploadPicture,
+            'onFallback' : function() {
+                alert('未检测到兼容版本的Flash.');
+            }
+        });
+        function uploadPicture(file, data){
+            var data = $.parseJSON(data);
+            var src = '';
+            if(data.status){
+                $("#icon").val(data.id);
+                src = data.url || '__ROOT__' + data.path;
+                $("#icon").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                );
+            } else {
+                updateAlert(data.info);
+                setTimeout(function(){
+                    $('#top-alert').find('button').click();
+                    $(that).removeClass('disabled').prop('disabled',false);
+                },1500);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function(){
+            var url = $(this).attr('url');
+            var query  = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+            query = query.replace(/^&/g,'');
+            if( url.indexOf('?')>0 ){
+                url += '&' + query;
+            }else{
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function(e){
+            if(e.keyCode === 13){
+                $("#search").click();
+                return false;
+            }
+        });
+    </script>
+</block>

@@ -1,0 +1,19 @@
+<html>
+<title></title>
+<body>
+<div class="form_item">
+    <foreach name="list" item="vo">
+        <video  controls="controls" loop="loop" autoplay="autoplay"  id="video">
+            <source src="{$vo.url}" type="video/mpeg" />
+            <source src="{$vo.url}" type="video/avi" />
+            <source src="{$vo.url}" type="video/rmvb" />
+            <source src="{$vo.url}" type="video/rm" />
+            <source src="{$vo.url}" type="video/wmv" />
+            <source src="{$vo.url}" type="video/ogg" />
+            <source src="{$vo.url}" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </foreach>
+</div>
+</body>
+</html>

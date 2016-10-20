@@ -1,0 +1,62 @@
+
+.headercolor{
+     color: #0066cc;
+ }
+.status{
+    margin-left: 35px;
+    margin-top: 5px;
+}
+.table{
+    background-color: #777777;
+
+}
+.fontset{
+    font-family: 'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;
+    font-size: 25px;
+}
+.newbutton{
+    margin-left: 50px;
+}
+.search{
+    margin-left: 940px;
+    margin-top: 15px;
+}
+.tophead{
+    margin-top: 15px;
+}
+.btn{
+    background-color: #7963df;
+}
+.la{
+    margin-right: 30px;
+}
+.choice{
+    width: 400px;
+    height:33px;
+}
+.decription{
+    width: 400px;
+    height: 100px;
+}
+.la1{
+    margin-right: 200px;
+}
+.btn1{
+    background-color: #7963df;
+    border: 0 none;
+    color: #edffd1;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    margin-right: 5px;
+    padding: 6px 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+.submitbutton{
+    margin-top: 10px;
+}
+.upload{
+    margin-left: 50px;
+}

@@ -1,0 +1,52 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>新增用户</h2>
+    </div>
+    <form action="{:U('User/do_addUser')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">代理商账号<span class="check-tips">（以字母开头不能少于5位，默认密码为123456）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="username" name="username" value="">
+                <span id="username_tip" style="color: red"></span>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">代理商名称<span class="check-tips">（代理商名称会作为默认的昵称）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="realname" name="realname" value="">
+                <span id="realname_tip" style="color: red"></span>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">联系电话</label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="tel" name="tel" value="">
+                <span id="tel_tip" style="color: red"></span>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">销售区域<span class="check-tips">（例如：河南，新乡）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="area" name="area" value="">
+                <span id="area_tip" style="color: red"></span>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">联系地址<span class="check-tips">（例如：新乡种子公司）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="address" name="address" value="">
+                <span id="address_tip" style="color: red"></span>
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+
+</block>

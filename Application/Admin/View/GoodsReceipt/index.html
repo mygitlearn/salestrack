@@ -1,0 +1,116 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>收货管理</h2>
+    </div>
+    <div class="cf">
+        <form action="{:U('GoodsReceipt/index')}" method="GET" class="form-horizontal">
+            <span>
+                <input style="width:170px;border:1px solid #EEEEEE;height:27px;" type="text"
+                       placeholder="&nbsp;开始时间" class="Wdate" name="start_time"
+                       onclick="WdatePicker({maxDate:'#F{$dp.$D(\\'end\\')}'})" id="start"/>
+            </span>
+            <span  style="margin-top:4px;background-color:#F6F6F6;border:0px solid;">
+                --
+            </span>
+            <span style="margin-right:45px;">
+                  <input style="border:1px solid #EEEEEE;width:170px;height:27px;" type="text"
+                         placeholder="&nbsp;结束时间" class="Wdate" name="end_time"
+                         onclick="WdatePicker({minDate:'#F{$dp.$D(\\'start\\')}',maxDate:'2050-10-01'})" id="end"/>
+            </span>
+            <span>
+                <input class="btn" style="margin-left: 20px" id="searchbtn" type="submit" target-form="form-horizontal" value="搜索">
+            </span>
+        </form>
+    </div>
+    <div class="cf">
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="receipt" class="search-input" value="{:I('receipt')}" placeholder="请输入物流编号或发货人">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+        <table class="">
+            <thead>
+            <tr>
+                <th class="">物流编号</th>
+                <th class="">发货时间</th>
+                <th class="">发货人</th>
+                <th class="">发货人电话</th>
+                <th class="">发货/退货</th>
+                <th class="">退货原因</th>
+                <th class="">状态</th>
+                <th class="">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="_list">
+                <volist name="_list" id="vo">
+                    <tr>
+                        <td>{$vo.NO}</td>
+                        <td>{$vo.time}</td>
+                        <td>{$vo.shippername}</td>
+                        <td>{$vo.shippertel}</td>
+                        <td><if condition="$vo.logisticstype eq 0">
+                            发货
+                            <else />
+                            退货
+                        </if>
+                        </td>
+                        <td>{$vo.reason}</td>
+                        <td><if condition="$vo.status eq 0">
+                                <a href="{:U('GoodsReceipt/setstatus?id='.$vo['id'])}" class="confirm ajax-get btn">接收</a>
+                            <else />
+                                <a href="javascript:;" class="btn disabled">已接收</a>
+                            </if>
+                        </td>
+                        <td>
+                            <a href="{:U('GoodsReceipt/lookgoods?sendid='.$vo['id'])}">查看详情</a>
+                        </td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+            </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function(){
+            var url = $(this).attr('url');
+            var query  = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+            query = query.replace(/^&/g,'');
+            if( url.indexOf('?')>0 ){
+                url += '&' + query;
+            }else{
+                url += '?' + query;
+            }
+
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function(e){
+            if(e.keyCode === 13){
+                $("#search").click();
+                return false;
+            }
+        });
+    </script>
+</block>
